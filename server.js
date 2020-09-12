@@ -1,7 +1,7 @@
 const express = require('express');
 const server = express();
 const mongoose = require('mongoose');
-//const users =require('./routes/users');
+const usersRoute =require('./routes/users');
 const messagesRoute= require('./routes/messages')
 const cors = require('cors');
 
@@ -27,7 +27,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 
-//server.use('/users/',users)
+server.use('/users/',usersRoute)
 server.use('/messages/',messagesRoute)
 
 server.listen(8000,() => {
