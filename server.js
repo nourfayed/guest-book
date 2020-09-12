@@ -29,7 +29,6 @@ mongoose.set('useCreateIndex', true);
 
 //server.use('/users/',users)
 server.use('/messages/',messagesRoute)
-server.use('/uploads/',express.static('uploads'));
 
 server.listen(8000,() => {
   console.log("server running successfully")});

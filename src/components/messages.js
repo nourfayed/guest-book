@@ -1,6 +1,7 @@
 import React , {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Card , Row , Col} from 'react-bootstrap'
+import {Card } from 'react-bootstrap';
+import {Link } from 'react-router-dom';
 
 function Messages(){
     const [allMessages, setallMessages] = useState([]);
@@ -16,17 +17,15 @@ function Messages(){
     })
     return ( 
         <div>
-            <h3 > A New Message!</h3>
+            <h3 > All New Messages!</h3>
             {allMessages.map((item)=>{
-                return <Card style={{  display : 'inline-block' }}>
+                return <Card style={{ width: '30rem' , display : 'inline-block' , margin  :'10px' ,  borderWidth:'10px'}}>
                 <Card.Body>
                   <Card.Title>from {item.ownersEmail}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
                   <Card.Text>
-                    {item.messageText}
+                    {item.messageText}  eqtytiurei utqieyrpwuyi   iiouwao 
                   </Card.Text>
-                  <Card.Link href="#">Card Link</Card.Link>
-                  <Card.Link href="#">Another Link</Card.Link>
+                 <Link style={{marginLeft:'20%'}} to={"/messages/"+item._id} >See Message Replies</Link>
                 </Card.Body>
               </Card>
             })}
