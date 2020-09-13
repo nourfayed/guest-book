@@ -44,4 +44,15 @@ usersRoute.get('/',async function (request, response) {
         response.status(500).json(err);
     }
 });
+usersRoute.get('/:id', async function (request, response) {
+    try {
+    
+        const  userId = request.params.id; 
+        const userInfo = await usersModel.findById(userId)
+        response.json(userInfo)
+
+    } catch (err) {
+        response.status(500).json(err);
+    }
+});
 module.exports = usersRoute;

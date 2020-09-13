@@ -1,5 +1,6 @@
 const express = require('express');
 const messagesModel = require('../models/messages')
+const usersModel = require('../models/users')
 const messagesRoute = express.Router();
 
 
@@ -8,6 +9,21 @@ messagesRoute.get('/', async function (request, response) {
     try {
         const allMessages = await messagesModel.find({})
         response.json(allMessages)
+
+    } catch (err) {
+        response.status(500).json(err);
+    }
+});
+messagesRoute.get('/user/:userId', async function (request, response) {
+    try {
+        console.log("---------------------------");
+        const userId = request.params.userId; 
+        console.log(userId);
+        const user = await usersModel.findById(userId);
+        console.log(user);
+        const messages = await messagesModel.find({ownersEmail:user.email});
+        console.log(messages);
+        response.json(messages)
 
     } catch (err) {
         response.status(500).json(err);

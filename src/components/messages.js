@@ -14,7 +14,7 @@ function Messages(){
     }
     useEffect(()=>{
         getAllMessages();
-    })
+    },[])
     return ( 
         <div>
             <h3 > All New Messages!</h3>
