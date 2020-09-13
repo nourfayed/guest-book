@@ -31,15 +31,9 @@ function MessageReplies(){
            
         })
     }
-    const deleteMessage =(e) =>{
-      e.preventDefault();
-      axios.delete(url+messageId)
-      .then(res =>{
-        //redirect 3ala l profile aw l home 
-        alert("The message is deleted successfully")
-      })
+   
 
-    }
+    
     useEffect(()=>{
         getMessage();
     },[])
@@ -51,10 +45,7 @@ function MessageReplies(){
                     {messageText}  
                   </Card.Text>
                 </Card.Body>
-                <div style={{ marginLeft:'150px',width: '40rem', display:'inline'}}>
-                    <Button variant="danger" onClick={deleteMessage} > Delete Message </Button>
-                    <Button variant="success" onClick={deleteMessage} > Edit Message </Button>
-                </div>
+                
         </Card>
         {replies.map((item)=>{
                 return <Card style={{ width: '30rem' ,marginLeft:'50px'}}>
@@ -67,7 +58,7 @@ function MessageReplies(){
               </Card>
             })}
         
-        <Form onSubmit={addReply} style={{ width: '30rem' ,marginLeft:'50px'}} >
+        <Form onSubmit={addReply} style={{ width: '30rem' ,marginLeft:'50px',marginTop:'20px'}} >
         <Form.Control type="text" placeholder="add your reply" value = {newReply}  onChange={e => setNewReply(e.target.value)}/>
         <Button  className="btn-warning" variant="primary" type="submit"> Reply </Button>
         </Form>

@@ -37,6 +37,14 @@ function UserProfile(){
     
 
     }
+    const deleteMessage =(e,messageId) =>{
+        e.preventDefault();
+        axios.delete(urlMessages+messageId)
+        .then(res =>{
+          //redirect 3ala l profile aw l home 
+          alert("The message is deleted successfully")
+        })
+    }
     useEffect(()=>{
         getUserInfo();
         getUsersMessages();
@@ -66,11 +74,15 @@ function UserProfile(){
               <Card.Text>
                 {item.messageText}  
               </Card.Text>
-             {/* <Link style={{marginLeft:'20%'}} to={"/messages/"+item._id} >See Message Replies</Link> */}
              <Link  to={"/messages/"+item._id} >  
                      <button className="btn-warning"> View Replies </button>
                      </Link>
             </Card.Body>
+           
+            <div style={{ marginLeft:'150px',width: '40rem', display:'inline'}}>
+                    <Button variant="danger" onClick={(e) => {deleteMessage(e,item._id)}} > Delete Message </Button>
+                    <Button variant="success" onClick={(e) => {deleteMessage(e,item._id)}} > Edit Message </Button>
+            </div>
           </Card> 
         })
         }

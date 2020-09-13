@@ -2,7 +2,7 @@
   
     background-color: rgb(40, 57, 88);
     border: 1px solid;
-    padding:20px;
+   
     margin: 20px;
     width : 400px;
     font-family: Helvetica, Arial, sans-serif;
@@ -13,6 +13,8 @@
     background-color : aquamarine;
     display: flex;
     flex-direction: column;
+     width:'100%';
+     height:'100%';
     /* justify-content: space-around;
     align-items: center; */
 }

@@ -10,13 +10,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   
-  return (     
-      <div style={{ backgroundColor :'aquamarine', width:'100%',height:'100%'}}>
-    
+  return (   
      
      <BrowserRouter>
      <NavBar/>
-
+     <div style={{ backgroundColor :'aquamarine', width:'100vw',height:'100vh'}}>
      <Switch>
          <Route  path="/messages/:id">  <MessageReplies/> </Route>
          <Route  path="/messages">  <Messages/> </Route>
@@ -24,9 +22,9 @@ function App() {
          <Route  path="/home">  <HomePage/> </Route>
          <Route exact path="/" > <HomePage/> </Route>     
       </Switch>
-      
+      </div>  
   </BrowserRouter>
-  </div>
+ 
   // <NavBar/>
   );
 }

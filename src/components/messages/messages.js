@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Card } from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import styles from './messages.module.css';
+import classnames from 'classnames';
 
 function Messages(){
     const [allMessages, setallMessages] = useState([]);
@@ -17,7 +18,7 @@ function Messages(){
         getAllMessages();
     },[])
     return ( 
-        <div className="card-columns ml-5">
+        <div className={classnames("card-columns", "ml-5")}>
             
             {allMessages.map((item)=>{
                 return <Card className ={styles.card} >
@@ -26,12 +27,13 @@ function Messages(){
                   <Card.Text>
                     {item.messageText}  
                   </Card.Text>
-                  <Card.Footer>
+                  
+                </Card.Body>
+                <Card.Footer>
                      <Link  to={"/messages/"+item._id} >  
                      <button className="btn-warning"> View Replies </button>
                      </Link>
                   </Card.Footer>
-                </Card.Body>
               </Card>
             })}
         </div>);
