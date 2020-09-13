@@ -19,20 +19,30 @@ function MessageReplies(){
             setmessageText(res.data.messageText);
             setownersEmail(res.data.ownersEmail);
             setReplies(res.data.replies)
-           
         })
     }
-    const handleSubmit=(e)=>{
+    const addReply=(e)=>{
         e.preventDefault();
         axios.post(url + "newreply/" , { replierEmail:"tmp@gmail.com" , replyText:newReply , id:messageId })
         .then(res =>{
             console.log("reg3naaaa", res.data)
+            getMessage()
             setNewReply("")
+           
         })
+    }
+    const deleteMessage =(e) =>{
+      e.preventDefault();
+      axios.delete(url+messageId)
+      .then(res =>{
+        //redirect 3ala l profile aw l home 
+        alert("The message is deleted successfully")
+      })
+
     }
     useEffect(()=>{
         getMessage();
-    })
+    },[])
     return (<div> 
         <Card style={{ width: '30rem' , display : 'inline-block' , margin  :'10px' ,  borderWidth:'10px'}}>
                 <Card.Body>
@@ -52,8 +62,9 @@ function MessageReplies(){
                 </Card.Body>
               </Card>
             })}
-        <Form onSubmit={handleSubmit}>
-        <Form.Control type="text" placeholder="add your reply" onChange={e => setNewReply(e.target.value)}/>
+        <Button variant="danger" onClick={deleteMessage} > Delete Message </Button>
+        <Form onSubmit={addReply}>
+        <Form.Control type="text" placeholder="add your reply" value = {newReply}  onChange={e => setNewReply(e.target.value)}/>
         <Button variant="primary" type="submit"> Reply </Button>
         </Form>
 

@@ -16,7 +16,7 @@ function Messages(){
         getAllMessages();
     },[])
     return ( 
-        <div>
+        <div  class="mt-5 ml-5 d-flex justify-content-center">
             <h3 > All New Messages!</h3>
             {allMessages.map((item)=>{
                 return <Card style={{ width: '30rem' , display : 'inline-block' , margin  :'10px' ,  borderWidth:'10px'}}>

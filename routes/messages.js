@@ -16,13 +16,10 @@ messagesRoute.get('/', async function (request, response) {
 });
 messagesRoute.get('/user/:userId', async function (request, response) {
     try {
-        console.log("---------------------------");
+        
         const userId = request.params.userId; 
-        console.log(userId);
         const user = await usersModel.findById(userId);
-        console.log(user);
         const messages = await messagesModel.find({ownersEmail:user.email});
-        console.log(messages);
         response.json(messages)
 
     } catch (err) {
@@ -60,13 +57,35 @@ messagesRoute.post('/newreply', async (req, res) => {
     try {
         const message = await messagesModel.findById(messageId)
         message.replies.push({replierEmail:messageData.replierEmail, replyText:messageData.replyText})
-        console.log( message.replies);
-        const updatedMessage= await messagesModel.findByIdAndUpdate(messageId,message)
-        console.log("the updated message is", updatedMessage);
+        const updatedMessage = await messagesModel.findByIdAndUpdate(messageId,message,{new: true})
         res.status(200).json(updatedMessage);
     } catch (err) {
         console.log(err);
         res.json(err);
     }
 })
+
+messagesRoute.post('/edit', async (req, res) => {
+   
+    const messageData = req.body;
+    const messageId = messageData.id
+    try {
+        const message = await messagesModel.findById(messageId)
+        message.messageText = messageData.messageText;
+        const updatedMessage = await messagesModel.findByIdAndUpdate(messageId,message,{new: true})
+        res.status(200).json(updatedMessage);
+    } catch (err) {
+        console.log(err);
+        res.json(err);
+    }
+})
+messagesRoute.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+      const result = await messagesModel.findByIdAndRemove(id);
+      res.json(result);
+    } catch (err) {
+      res.status(500).json("IS NOT DELETED");
+    }
+  });
 module.exports = messagesRoute;

@@ -10,13 +10,14 @@ function App() {
   
   return (
       // <UserProfile/>
-      // <Messages/>
+      // <HomePage/>
      <BrowserRouter>
      <Switch>
          <Route  path="/messages/:id">  <MessageReplies/> </Route>
-         <Route exact path="/" > <Messages/> </Route>     
-     </Switch>
- </BrowserRouter>
+         {/* <Route exact path="/" > <Messages/> </Route>  */}
+            <Route exact path="/" > <UserProfile/> </Route>     
+      </Switch>
+  </BrowserRouter>
   );
 }
 
