@@ -46,25 +46,30 @@ function UserProfile(){
         <Card style={{ width: '30rem' , display : 'inline-block' , margin  :'10px' ,  borderWidth:'10px'}}>
             <Card.Body>
             <Card.Title> {userInfo.firstName} {userInfo.lastName}</Card.Title>
+            <Card.Footer>
             <Card.Text>
                 email : {userInfo.email}  
             </Card.Text>
+            </Card.Footer>
             </Card.Body>
         </Card>
 
-        <Form onSubmit={addNewMessage}>
+        <Form onSubmit={addNewMessage}  style={{ width: '30rem',margin  :'10px',display : 'inline-block'}}>
         <Form.Control type="text" placeholder="Add a new message here" value = {newMsg}  onChange={e => setnewMsg(e.target.value)}/>
-        <Button variant="primary" type="submit"> Add Message </Button>
+        <Button className="btn-warning" style={{marginLeft:'350px'}} type="submit"> Add Message </Button>
         </Form>
 
-        <h3>Your Old Messages</h3>
+        <h2>Your Old Messages</h2>
         {usersMessages.map((item)=>{
             return  <Card style={{ width: '30rem' , display : 'inline-block' , margin  :'10px' ,  borderWidth:'10px'}}>
             <Card.Body>
               <Card.Text>
-                {item.messageText}  eqtytiurei utqieyrpwuyi   iiouwao 
+                {item.messageText}  
               </Card.Text>
-             <Link style={{marginLeft:'20%'}} to={"/messages/"+item._id} >See Message Replies</Link>
+             {/* <Link style={{marginLeft:'20%'}} to={"/messages/"+item._id} >See Message Replies</Link> */}
+             <Link  to={"/messages/"+item._id} >  
+                     <button className="btn-warning"> View Replies </button>
+                     </Link>
             </Card.Body>
           </Card> 
         })

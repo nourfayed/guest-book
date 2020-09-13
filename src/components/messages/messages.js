@@ -2,6 +2,7 @@ import React , {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Card } from 'react-bootstrap';
 import {Link } from 'react-router-dom';
+import styles from './messages.module.css';
 
 function Messages(){
     const [allMessages, setallMessages] = useState([]);
@@ -16,16 +17,20 @@ function Messages(){
         getAllMessages();
     },[])
     return ( 
-        <div  class="mt-5 ml-5 d-flex justify-content-center">
-            <h3 > All New Messages!</h3>
+        <div className="card-columns ml-5">
+            
             {allMessages.map((item)=>{
-                return <Card style={{ width: '30rem' , display : 'inline-block' , margin  :'10px' ,  borderWidth:'10px'}}>
+                return <Card className ={styles.card} >
                 <Card.Body>
-                  <Card.Title>from {item.ownersEmail}</Card.Title>
+                  <Card.Title> {item.ownersEmail} :</Card.Title>
                   <Card.Text>
-                    {item.messageText}  eqtytiurei utqieyrpwuyi   iiouwao 
+                    {item.messageText}  
                   </Card.Text>
-                 <Link style={{marginLeft:'20%'}} to={"/messages/"+item._id} >See Message Replies</Link>
+                  <Card.Footer>
+                     <Link  to={"/messages/"+item._id} >  
+                     <button className="btn-warning"> View Replies </button>
+                     </Link>
+                  </Card.Footer>
                 </Card.Body>
               </Card>
             })}

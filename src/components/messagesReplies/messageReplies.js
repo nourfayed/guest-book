@@ -44,29 +44,34 @@ function MessageReplies(){
         getMessage();
     },[])
     return (<div> 
-        <Card style={{ width: '30rem' , display : 'inline-block' , margin  :'10px' ,  borderWidth:'10px'}}>
+        <Card style={{ width: '40rem' , margin  :'10px' ,  borderWidth:'2px'}}>
                 <Card.Body>
-                  <Card.Title>from {ownersEmail}</Card.Title>
+                  <Card.Title> {ownersEmail} :</Card.Title>
                   <Card.Text>
                     {messageText}  
                   </Card.Text>
                 </Card.Body>
+                <div style={{ marginLeft:'150px',width: '40rem', display:'inline'}}>
+                    <Button variant="danger" onClick={deleteMessage} > Delete Message </Button>
+                    <Button variant="success" onClick={deleteMessage} > Edit Message </Button>
+                </div>
         </Card>
         {replies.map((item)=>{
-                return <Card style={{ width: '30rem' , display : 'inline-block' , margin  :'10px' ,  borderWidth:'10px'}}>
+                return <Card style={{ width: '30rem' ,marginLeft:'50px'}}>
                 <Card.Body>
-                  <Card.Title>from {item.replierEmail}</Card.Title>
+                  <Card.Title>{item.replierEmail} :</Card.Title>
                   <Card.Text>
-                    {item.replyText} 
+                      {item.replyText} 
                   </Card.Text>
                 </Card.Body>
               </Card>
             })}
-        <Button variant="danger" onClick={deleteMessage} > Delete Message </Button>
-        <Form onSubmit={addReply}>
+        
+        <Form onSubmit={addReply} style={{ width: '30rem' ,marginLeft:'50px'}} >
         <Form.Control type="text" placeholder="add your reply" value = {newReply}  onChange={e => setNewReply(e.target.value)}/>
-        <Button variant="primary" type="submit"> Reply </Button>
+        <Button  className="btn-warning" variant="primary" type="submit"> Reply </Button>
         </Form>
+        
 
     </div>);
 }

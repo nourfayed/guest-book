@@ -44,25 +44,25 @@ axios.get('http://localhost:5000/users/getUser/'+token)//bnb3to fl url fa asibo 
     })
 }
 if(redirectPage)return  <Redirect  to="/categories" />
-  return (<div className="d-flex justify-content-end " style={{marginRight:'25px'}}>
-    <div class="card text-white" style={{width: "350px"}}>
-           <Form onSubmit={handleSubmit} >
+  return (<div  style={{marginRight:'25px'}}>
+    
+           <Form onSubmit={handleSubmit} style={{ display : 'inline'}} >
             <Form.Row>
               
               <Form.Group controlId="formGroupEmail">
-                  <Form.Control type="email" placeholder="email"  value={email} onChange={e => setEmail(e.target.value)} style={{width:'200px',marginLeft:"85px"}}/>
+                  <Form.Control type="email" placeholder="email"  value={email} onChange={e => setEmail(e.target.value)}/>
               </Form.Group>
         
               <Form.Group controlId="formGroupPassword">
-                  <Form.Control type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} style={{width:'200px',marginLeft:"85px"}}/>
+                  <Form.Control type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
               </Form.Group>
                   
-                      <Button type="submit " style={{marginLeft:"155px"}}className="mb-2 d-flex justify-content-center btn btn-warning"  >Login</Button>
+              <Button type="submit " className="mb-2 d-flex justify-content-center btn btn-warning"  >Login</Button>
                 
             </Form.Row>
          </Form>
        
-         </div>
+         
      </div>);
 }
 export default LoginForm;
