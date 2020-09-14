@@ -42,13 +42,12 @@ function UserProfile(){
         e.preventDefault();
         axios.delete(urlMessages+messageId)
         .then(res =>{
-          //redirect 3ala l profile aw l home 
           alert("The message is deleted successfully")
+          window.location.reload();
         })
     }
     useEffect(()=>{
         getUserIdFromToken();
-        // getUserInfo();
         getUsersMessages();
     },[])
     

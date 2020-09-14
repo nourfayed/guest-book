@@ -1,15 +1,16 @@
 import React ,{useState}from 'react';
 import {Form,Button ,Row} from 'react-bootstrap'
-// import './RegisterForm.css'
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
-//confirm password wl email gedid wala la?
 function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword]= useState("");
   const [cpassword, setcPassword]= useState("");
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName]= useState("");
+  const [redirectPage,setRedirectState]= useState(null)
+
     
   const handleSubmit= (e)=>{
     e.preventDefault();
@@ -19,6 +20,7 @@ function RegisterForm() {
     .then(res => {
       console.log("da l res",res);
       sessionStorage.setItem('userToken', JSON.stringify(res.data)) //add the token to the session storage as a string
+      setRedirectState(1)
       setEmail('')
       setPassword('')
       setcPassword('')
@@ -31,7 +33,7 @@ function RegisterForm() {
   }
   
 }
-  
+if(redirectPage)return  <Redirect  to="/messages" />
   return (<Form   onSubmit={handleSubmit} >
    <h5 class="text-white font-italic"  style={{fontSize:"30px"}}>Create a free account now!</h5>
     

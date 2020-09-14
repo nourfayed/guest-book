@@ -1,8 +1,7 @@
 import React , { useState } from 'react';
-import {Form, Col, Button } from 'react-bootstrap';
+import {Form,  Button } from 'react-bootstrap';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
-// import login from '../../assests/login.svg'
 
 function LoginForm() {
   

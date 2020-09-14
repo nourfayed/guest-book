@@ -14,16 +14,16 @@ function App() {
   
   return (   
      
-     <BrowserRouter>
-       {sessionStorage.getItem("userToken") ?  <NavBar/>:<Redirect to='/' /> }
-    
-     <div style={{ backgroundColor :'aquamarine', width:'100%',height:'100%'}}>
+    <BrowserRouter>
+     <NavBar/>
+    {/* {sessionStorage.getItem("userToken") ?  <NavBar/>:<Redirect to='/' /> } */}
+    <div style={{ backgroundColor :'aquamarine', width:'100%',height:'100%'}}>
      <Switch>
+    
          <Route  path="/messages/:id">  <MessageReplies/> </Route>
          <Route  path="/messages">  <Messages/> </Route>
          <Route  path="/profile">  <UserProfile/> </Route>
          <Route  path="/editMessage/:id">  <EditMessage/> </Route>
-         <Route  path="/home">  <HomePage/> </Route>
          <Route exact path="/" > <HomePage/> </Route>     
       </Switch>
       </div>  

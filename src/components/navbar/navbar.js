@@ -1,21 +1,22 @@
-import React from 'react';
+import React , {useState}from 'react';
 import {Link } from 'react-router-dom';
 import logoutPicture from './l.png';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 function NavBar(){
+  const [redirectPage,setRedirectState]= useState(null)
   const logout = () => {
-    console.log("In the logout function...");
     const token = JSON.parse(sessionStorage.getItem('userToken')); //fetch l token and parse it 3ashan hanb3to fl body bta3 l request
     sessionStorage.removeItem('userToken'); 
-     
+    setRedirectState(1)
     axios.post('http://localhost:8000/users/logout', { 
         token
       })
       .then(res => {
        console.log(res.data); 
       })
-    window.location.reload();
+      if(redirectPage)return  <Redirect  to="/" />
   }
     return (<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
    
@@ -28,17 +29,19 @@ function NavBar(){
       <li class="nav-item">
           <Link  className="nav-link" to="/messages/" > Messages  </Link> 
         </li>
+        {sessionStorage.getItem("userToken") ?  
         <li class="nav-item">
         <Link  className="nav-link" to="/profile/" > Profile  </Link> 
         </li>
-        {/* <li class="nav-item">
-        <Link  className="nav-link" to="/home/" > Home  </Link>
-        </li> */}
+        :<Redirect to='/' /> }
+        
         </ul>
     </div>
+    {sessionStorage.getItem("userToken") ?  
     <div className="d-flex justify-content-end ">
         <Link  to="/"> <img  class="img" src={logoutPicture} style={{width:'30px', height:'30px'}} onClick={()=>logout()}/></Link> 
-        </div>
+    </div>
+      :<Redirect to='/' /> }
   </nav>);
 }
 

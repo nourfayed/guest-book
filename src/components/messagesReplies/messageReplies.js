@@ -2,6 +2,8 @@ import React,  {useState, useEffect}  from 'react'
 import axios from 'axios';
 import { useParams } from "react-router";
 import {Card,Form,Button} from 'react-bootstrap';
+import {Link } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 
 function MessageReplies(){
@@ -66,11 +68,14 @@ function MessageReplies(){
                 </Card.Body>
               </Card>
             })}
-        
-        <Form onSubmit={addReply} style={{ width: '30rem' ,marginLeft:'50px',marginTop:'20px'}} >
-        <Form.Control type="text" placeholder="add your reply" value = {newReply}  onChange={e => setNewReply(e.target.value)}/>
-        <Button  className="btn-warning" variant="primary" type="submit"> Reply </Button>
-        </Form>
+        {sessionStorage.getItem("userToken") ? 
+            <Form onSubmit={addReply} style={{ width: '30rem' ,marginLeft:'50px',marginTop:'20px'}} >
+                <Form.Control type="text" placeholder="add your reply" value = {newReply}  onChange={e => setNewReply(e.target.value)}/>
+                <Button  className="btn-warning" variant="primary" type="submit"> Reply </Button>
+            </Form>
+         : 
+
+         <Link  to={"/"} style={{ marginLeft:'200px'}} > <Button className="btn-warning"> Login to add a reply</Button> </Link>}
         
 
     </div>);
