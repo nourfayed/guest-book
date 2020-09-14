@@ -18,7 +18,7 @@ function RegisterForm() {
     axios.post('http://localhost:8000/users/register',{firstName,lastName,email,password} )
     .then(res => {
       console.log("da l res",res);
-      alert("Welcome! Login to begin your journey") 
+      sessionStorage.setItem('userToken', JSON.stringify(res.data)) //add the token to the session storage as a string
       setEmail('')
       setPassword('')
       setcPassword('')

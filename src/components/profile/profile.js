@@ -4,23 +4,24 @@ import axios from 'axios';
 import {Link } from 'react-router-dom';
 
 function UserProfile(){
-    const userId ="5f5d1ec699a79f52a9057659";
     let urlMessages = "http://localhost:8000/messages/";
-    let urlUsers = "http://localhost:8000/users/";
     const [usersMessages, setusersMessages] = useState([]);
     const [userInfo, setuserInfo] = useState({});
     const [newMsg , setnewMsg ] = useState("");
-
-    const getUserInfo = () => {
-        axios.get(urlUsers + userId )
-        .then(res =>{
-            setuserInfo(res.data)
-        }
-        )
+   
+    const getUserIdFromToken =() =>{
+  
+        const token = sessionStorage.getItem('userToken'); 
+        axios.get('http://localhost:8000/users/getUser/'+token)
+            .then(res => {
+                setuserInfo(res.data)
+              console.log("The user id is "+res.data); 
+            })
     }
     const getUsersMessages = () =>{
-        console.log( userInfo.ownersEmail);
-        axios.get(urlMessages +'/user/'+ userId )
+        
+        console.log( userInfo.email);
+        axios.get(urlMessages +'user/'+ userInfo._id )
         .then(res => 
             setusersMessages(res.data))
 
@@ -46,7 +47,8 @@ function UserProfile(){
         })
     }
     useEffect(()=>{
-        getUserInfo();
+        getUserIdFromToken();
+        // getUserInfo();
         getUsersMessages();
     },[])
     
@@ -74,14 +76,12 @@ function UserProfile(){
               <Card.Text>
                 {item.messageText}  
               </Card.Text>
-             <Link  to={"/messages/"+item._id} >  
-                     <button className="btn-warning"> View Replies </button>
-                     </Link>
+             <Link  to={"/messages/"+item._id} > <Button className="btn-warning"> View Replies </Button> </Link>
             </Card.Body>
            
             <div style={{ marginLeft:'150px',width: '40rem', display:'inline'}}>
                     <Button variant="danger" onClick={(e) => {deleteMessage(e,item._id)}} > Delete Message </Button>
-                    <Button variant="success" onClick={(e) => {deleteMessage(e,item._id)}} > Edit Message </Button>
+                    <Link  to={"/editMessage/"+item._id} ><Button variant="success" > Edit Message </Button></Link>
             </div>
           </Card> 
         })

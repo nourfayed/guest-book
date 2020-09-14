@@ -10,6 +10,7 @@ const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [redirectPage,setRedirectState]= useState(null)
 
+
 const handleSubmit = (e) => {
   e.preventDefault();
   console.log(email);
@@ -24,7 +25,7 @@ const handleSubmit = (e) => {
         console.log(JSON.stringify(res.data));
         sessionStorage.setItem('userToken', JSON.stringify(res.data)) //add the token to the session storage as a string
         alert("You are successfully logged in")
-
+        setRedirectState(1)
          window.location.reload();
       }  
     })
@@ -35,15 +36,8 @@ const handleSubmit = (e) => {
     setEmail('')
     setPassword('')
 }
-const getUserIdFromToken =() =>{
-  
-const token = sessionStorage.getItem('userToken'); //fetch stringified token from session storage
-axios.get('http://localhost:5000/users/getUser/'+token)//bnb3to fl url fa asibo string 3adi
-    .then(res => {
-      console.log("The user id is "+res.data); // aho l id aho aho.......
-    })
-}
-if(redirectPage)return  <Redirect  to="/categories" />
+
+if(redirectPage)return  <Redirect  to="/messages" />
   return (<div  style={{marginRight:'25px'}}>
     
            <Form onSubmit={handleSubmit} style={{ display : 'inline'}} >

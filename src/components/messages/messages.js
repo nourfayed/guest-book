@@ -1,6 +1,6 @@
 import React , {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Card } from 'react-bootstrap';
+import {Card, Button } from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import styles from './messages.module.css';
 import classnames from 'classnames';
@@ -31,7 +31,7 @@ function Messages(){
                 </Card.Body>
                 <Card.Footer>
                      <Link  to={"/messages/"+item._id} >  
-                     <button className="btn-warning"> View Replies </button>
+                     <Button className="btn-warning"> View Replies </Button>
                      </Link>
                   </Card.Footer>
               </Card>

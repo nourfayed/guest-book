@@ -69,10 +69,13 @@ messagesRoute.post('/edit', async (req, res) => {
    
     const messageData = req.body;
     const messageId = messageData.id
+    console.log(messageId);
     try {
         const message = await messagesModel.findById(messageId)
         message.messageText = messageData.messageText;
+        console.log(message);
         const updatedMessage = await messagesModel.findByIdAndUpdate(messageId,message,{new: true})
+        console.log(updatedMessage);
         res.status(200).json(updatedMessage);
     } catch (err) {
         console.log(err);

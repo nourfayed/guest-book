@@ -9,6 +9,7 @@ function MessageReplies(){
     const [ownersEmail,setownersEmail]=useState("");
     const [replies,setReplies]=useState([]);
     const [newReply,setNewReply]=useState("");
+    const [user,setUser] = useState({})
     const params = useParams();
     const messageId = params.id;
     let url = "http://localhost:8000/messages/"
@@ -21,21 +22,29 @@ function MessageReplies(){
             setReplies(res.data.replies)
         })
     }
+    const getUserIdFromToken =() =>{
+  
+        const token = sessionStorage.getItem('userToken'); 
+        axios.get('http://localhost:8000/users/getUser/'+token)
+            .then(res => {
+              setUser(res.data)
+              console.log("The user id is "+res.data); // aho l id aho aho.......
+            })
+    }
     const addReply=(e)=>{
         e.preventDefault();
-        axios.post(url + "newreply/" , { replierEmail:"tmp@gmail.com" , replyText:newReply , id:messageId })
+        console.log("DAA L USER", user);
+        axios.post(url + "newreply/" , { replierEmail:user.email , replyText:newReply , id:messageId })
         .then(res =>{
-            console.log("reg3naaaa", res.data)
             getMessage()
             setNewReply("")
            
         })
     }
-   
 
-    
     useEffect(()=>{
         getMessage();
+        getUserIdFromToken();
     },[])
     return (<div> 
         <Card style={{ width: '40rem' , margin  :'10px' ,  borderWidth:'2px'}}>
