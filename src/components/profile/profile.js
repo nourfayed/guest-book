@@ -2,12 +2,16 @@ import React , {useState, useEffect} from 'react';
 import {Card,Form,Button} from 'react-bootstrap';
 import axios from 'axios';
 import {Link } from 'react-router-dom';
+import { useParams } from "react-router";
 
 function UserProfile(){
     let urlMessages = "http://localhost:8000/messages/";
     const [usersMessages, setusersMessages] = useState([]);
     const [userInfo, setuserInfo] = useState({});
     const [newMsg , setnewMsg ] = useState("");
+
+    const params = useParams();
+    const userId = params.id;
    
     const getUserIdFromToken =() =>{
   
@@ -20,8 +24,7 @@ function UserProfile(){
     }
     const getUsersMessages = () =>{
         
-        console.log( userInfo.email);
-        axios.get(urlMessages +'user/'+ userInfo._id )
+        axios.get(urlMessages +'user/'+ userId )
         .then(res => 
             setusersMessages(res.data))
 

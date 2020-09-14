@@ -1,4 +1,4 @@
-import React , {useState}from 'react';
+import React , {useState , useEffect}from 'react';
 import {Link } from 'react-router-dom';
 import logoutPicture from './l.png';
 import {Redirect} from 'react-router-dom';
@@ -6,6 +6,8 @@ import axios from 'axios';
 
 function NavBar(){
   const [redirectPage,setRedirectState]= useState(null)
+  const [userId, setUserId] = useState("")
+  
   const logout = () => {
     const token = JSON.parse(sessionStorage.getItem('userToken')); //fetch l token and parse it 3ashan hanb3to fl body bta3 l request
     sessionStorage.removeItem('userToken'); 
@@ -18,6 +20,19 @@ function NavBar(){
       })
       if(redirectPage)return  <Redirect  to="/" />
   }
+  
+  const getUserIdFromToken =() =>{
+  
+    const token = sessionStorage.getItem('userToken'); 
+    axios.get('http://localhost:8000/users/getUser/'+token)
+        .then(res => {
+          setUserId(res.data._id)
+          console.log("The user id is "+res.data); 
+        })
+}
+useEffect(()=>{
+  getUserIdFromToken();
+},[])
     return (<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +46,7 @@ function NavBar(){
         </li>
         {sessionStorage.getItem("userToken") ?  
         <li class="nav-item">
-        <Link  className="nav-link" to="/profile/" > Profile  </Link> 
+        <Link  className="nav-link" to={"/profile/"+userId} > Profile  </Link> 
         </li>
         :<Redirect to='/' /> }
         
